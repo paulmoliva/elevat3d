@@ -81,7 +81,7 @@ class PollVote extends React.Component {
             this.props.addResults(message);
           }
 
-          if(message.name){
+          if(message.name && this.state.name === ''){
               this.setState({pollName: message.name})
           }
           // if (data.message.vote) {
