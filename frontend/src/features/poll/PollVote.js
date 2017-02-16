@@ -79,18 +79,22 @@ class PollVote extends React.Component {
           const message = data.message;
           if (data.channel.match(/result/)) {
             this.props.addResults(message);
-            this.setState({pollName: this.props.currentPoll.name})
+          }
+
+          if(message.name){
+              this.setState({pollName: message.name})
           }
           // if (data.message.vote) {
           //   this.props.addVote(data.message.vote);
           // }
         }
       });
-
+      
       pubnub.publish({
         message: {
           "poll_id": this.props.router.params.id,
-          "send_results": true
+          "send_results": true,
+          "name": this.props.router.getCurrentLocation().search.split('=')[1]
         },
         channel: 'voting-channel'
       });

@@ -44,7 +44,7 @@ export class DefaultPage extends Component {
   handleSubmit(e) {
     e.preventDefault();
     var token = crypto.randomBytes(6).toString('hex');
-    browserHistory.push('/poll/' + token)
+    browserHistory.push('/poll/' + token + '?' + $.param({name: $('.input').val()}))
   }
 
   handlePollSubmit(e) {
