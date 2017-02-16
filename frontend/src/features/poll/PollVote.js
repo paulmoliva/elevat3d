@@ -89,7 +89,7 @@ class PollVote extends React.Component {
           // }
         }
       });
-      
+
       pubnub.publish({
         message: {
           "poll_id": this.props.router.params.id,
@@ -156,7 +156,7 @@ class PollVote extends React.Component {
   render() {
     return (
       <div>
-          <h1>{this.state.pollName}</h1>
+          <h1>{decodeURIComponent(this.state.pollName)}</h1>
         <br></br>
         <label>
           Email Address:

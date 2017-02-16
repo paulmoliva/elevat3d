@@ -66652,7 +66652,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          this.state.pollName
+	          decodeURIComponent(this.state.pollName)
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
