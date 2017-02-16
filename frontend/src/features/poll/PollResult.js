@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Chart from './d3Wrapper';
 
 class PollResult extends Component {
   constructor(props) {
@@ -22,14 +23,14 @@ class PollResult extends Component {
   }
 
   render() {
-    
+
     return (
       <div>
         <h3>Poll Results</h3>
         <ul>
           { this.renderResults() }
         </ul>
-
+        <Chart results={this.props.results}/>
       </div>
     )
   }
