@@ -19,3 +19,4 @@ bundle.js
 bundle.js.map
 bundle.map.js
 venv
+*.pyc
