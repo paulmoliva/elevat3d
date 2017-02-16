@@ -14,9 +14,11 @@ class PollResult extends Component {
     const resultLines = [];
 
     for (var key in results) {
-      resultLines.push(<li key={key}>
-        <span>{key}</span>: <span>{results[key]}</span>
-      </li>);
+      if(key != 'name'){
+          resultLines.push(<li key={key}>
+            <span>{key}</span>: <span>{results[key]}</span>
+          </li>);
+      }
     };
 
     return resultLines;

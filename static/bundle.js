@@ -49649,21 +49649,23 @@
 	      var resultLines = [];
 	
 	      for (var key in results) {
-	        resultLines.push(_react2.default.createElement(
-	          'li',
-	          { key: key },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            key
-	          ),
-	          ': ',
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            results[key]
-	          )
-	        ));
+	        if (key != 'name') {
+	          resultLines.push(_react2.default.createElement(
+	            'li',
+	            { key: key },
+	            _react2.default.createElement(
+	              'span',
+	              null,
+	              key
+	            ),
+	            ': ',
+	            _react2.default.createElement(
+	              'span',
+	              null,
+	              results[key]
+	            )
+	          ));
+	        }
 	      };
 	
 	      return resultLines;
