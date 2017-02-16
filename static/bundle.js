@@ -66570,7 +66570,7 @@
 	              _this2.props.addResults(message);
 	            }
 	
-	            if (message.name && _this2.state.pollName === '') {
+	            if (message.name) {
 	              _this2.setState({ pollName: message.name });
 	            }
 	            // if (data.message.vote) {
