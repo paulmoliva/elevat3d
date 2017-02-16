@@ -36,14 +36,7 @@ class ShowPoll extends Component {
   }
 
 
-  componentDidMount() {
 
-    const pollId = this.props.router.params.id;
-
-    if (pollId) {
-      this.props.getPoll(pollId);
-    }
-  }
 
 
 

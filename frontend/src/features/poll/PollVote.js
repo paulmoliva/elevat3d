@@ -52,16 +52,15 @@ class PollVote extends React.Component {
   //   this.props.actions.sub();
   // }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
       console.log(this.props);
-      const poll = nextProps.currentPoll;
       if (this.props.router.params.id && !this.state.subscribed) {
-        this.subscribe(poll);
+        this.subscribe();
         this.setState({subscribed: true});
       }
   }
 
-  subscribe(poll) {
+  subscribe() {
     //   const pollId = this.props.router.params.id;
     const pollId = this.props.router.params.id
     if (pollId) {

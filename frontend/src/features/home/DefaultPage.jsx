@@ -9,6 +9,7 @@ import PollsSvg from './PollsSvg';
 
 import Typist from 'react-typist';
 
+const crypto = require('crypto');
 
 export class DefaultPage extends Component {
   static propTypes = {
@@ -42,13 +43,8 @@ export class DefaultPage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    $.ajax({
-      url: '/api/polls',
-      type: 'post',
-      data: {'poll':{'name': $('.input').val()}},
-    }).success(resp => {
-      browserHistory.push('/poll/' + resp['token'])
-    })
+    var token = crypto.randomBytes(6).toString('hex');
+    browserHistory.push('/poll/' + token)
   }
 
   handlePollSubmit(e) {
