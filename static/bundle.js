@@ -67094,6 +67094,10 @@
 	
 	var _reactRedux = __webpack_require__(479);
 	
+	var _d3Wrapper = __webpack_require__(669);
+	
+	var _d3Wrapper2 = _interopRequireDefault(_d3Wrapper);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67156,7 +67160,8 @@
 	          'ul',
 	          null,
 	          this.renderResults()
-	        )
+	        ),
+	        _react2.default.createElement(_d3Wrapper2.default, { results: this.props.results })
 	      );
 	    }
 	  }]);
@@ -67306,6 +67311,7 @@
 	        pubnub.addListener({
 	          message: function message(data) {
 	            console.log('PUBNUB:' + data);
+	            console.table(data);
 	            var message = data.message;
 	            if (data.channel.match(/result/)) {
 	              _this2.props.addResults(message);
@@ -67315,6 +67321,14 @@
 	            //   this.props.addVote(data.message.vote);
 	            // }
 	          }
+	        });
+	
+	        pubnub.publish({
+	          message: {
+	            "poll_id": this.props.router.params.id,
+	            "send_results": true
+	          },
+	          channel: 'voting-channel'
 	        });
 	      }
 	
@@ -84355,7 +84369,6 @@
 	        'Show Poll',
 	        _react2.default.createElement(_PollResult2.default, null),
 	        _react2.default.createElement(_PollVote2.default, { router: this.props.router, pollName: this.props.currentPoll.name }),
-	        _react2.default.createElement(_d3Wrapper2.default, null),
 	        _react2.default.createElement(_PollList2.default, { polls: pubnub.polls })
 	      );
 	    }

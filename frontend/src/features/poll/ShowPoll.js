@@ -50,7 +50,7 @@ class ShowPoll extends Component {
         <PollResult />
         <PollVote router={this.props.router} pollName={this.props.currentPoll.name}/>
 
-        <Chart />
+        
 
         <PollList polls={pubnub.polls} />
       </div>

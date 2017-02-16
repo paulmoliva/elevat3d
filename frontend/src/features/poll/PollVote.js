@@ -75,6 +75,7 @@ class PollVote extends React.Component {
       pubnub.addListener({
         message: (data) => {
           console.log('PUBNUB:' + data);
+          console.table(data)
           const message = data.message;
           if (data.channel.match(/result/)) {
             this.props.addResults(message);
@@ -86,6 +87,13 @@ class PollVote extends React.Component {
         }
       });
 
+      pubnub.publish({
+        message: {
+          "poll_id": this.props.router.params.id,
+          "send_results": true
+        },
+        channel: 'voting-channel'
+      });
     }
 
     // pubnub.publish({
