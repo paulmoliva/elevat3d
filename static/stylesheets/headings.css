@@ -1,0 +1,10 @@
+.heading {
+    margin: 0 0 1rem;
+    text-align: center;
+    /* color: #666; */
+}
+
+#chart-container {
+    max-width: 600px;
+    max-height: 450px;
+}
