@@ -1,0 +1,13 @@
+.chart-container {
+    width: 100%;
+    max-width: 740px;
+    /* margin: 0 auto; */
+}
+
+.graph {
+    /*display: flex;*/
+    /*flex-direction: column-reverse;*/
+    margin-top: auto;
+    max-width: 800px;
+    width: 60%;
+}

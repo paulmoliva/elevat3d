@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import {router, browserHistory} from 'react-router';
 class GetStarted extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick() {
         // debugger;
-        browserHistory.push('/oauth');
+        browserHistory.push('/?o=1');
         window.location.reload();
     }
-    
+
     render() {
     const { handleSubmit } = this.props;
     return (
@@ -24,9 +24,9 @@ class GetStarted extends Component {
           </button></a>
         </form>
       </div>
-    )
-        
+    );
+
     }
 }
 
-export default GetStarted
+export default GetStarted;
