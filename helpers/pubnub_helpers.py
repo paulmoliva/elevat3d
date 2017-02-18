@@ -69,4 +69,4 @@ def publish_callback(result, status):
 
 
 def publish_user_info(user):
-    pubnub.publish().channel('elevate_users').message({'user':user}).async(publish_callback)
+    pubnub.publish().channel('elevate-users').message(user).async(publish_callback)

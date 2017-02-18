@@ -3,7 +3,7 @@
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/application.css') }}">
 <div id="root"></div>
 <script type="text/javascript">
-  window.currentUser = false;
+  window.currentUser = JSON.parse(`{{currentUser|safe or 'null'}}`);
 
 </script>
 <script src="/static/bundle.js"></script>
