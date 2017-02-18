@@ -19,3 +19,4 @@ bundle.map.js
 venv
 *.pyc
 *.css.map
+__pycache__

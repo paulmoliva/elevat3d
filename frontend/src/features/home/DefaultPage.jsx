@@ -19,10 +19,18 @@ export class DefaultPage extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+        question: '',
+        focus: false
+    };
     this.handlePlusOne = ::this.handlePlusOne;
     this.handleMinusOne = ::this.handleMinusOne;
     this.handleReset = ::this.handleReset;
     this.handleFetchReddit = ::this.handleFetchReddit;
+    this.handleChange = ::this.handleChange;
+    this.handleSubmit = ::this.handleSubmit;
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
 
   handlePlusOne() {
@@ -44,7 +52,7 @@ export class DefaultPage extends Component {
   handleSubmit(e) {
     e.preventDefault();
     var token = crypto.randomBytes(6).toString('hex');
-    browserHistory.push('/poll/' + token + '?' + $.param({name: $('.input').val()}))
+    browserHistory.push('/poll/' + token + '?' + $.param({name: this.state.question}))
   }
 
   handlePollSubmit(e) {
@@ -56,42 +64,60 @@ export class DefaultPage extends Component {
     browserHistory.push('get-started');
   }
 
+  handleChange(e) {
+      this.setState({question: e.target.value});
+  }
+
+  onFocus(e) {
+      this.setState({focused: true});
+  }
+
+  onBlur(e) {
+      this.setState({focused: false});
+  }
+
   render() {
     const { count, fetchRedditReactjsListPending, redditReactjsList, fetchRedditReactjsListError } = this.props.home;
-    let cursor = {show: true,blink: true,element: '|',hideWhenDone: true,hideWhenDoneDelay: 3000};
+    let cursor = {
+        show: true,
+        blink: true,
+        element: '|',
+        hideWhenDone: true,
+        hideWhenDoneDelay: 3000
+    };
+    let {question, focused} = this.state;
+    let placeholder = (question && !focused) ? '' : 'What is your Question?';
     return (
       <div className="page-home">
           {((!window.currentUser) ?
             (
-            <div className="c c-splash">
-                <div className="c-temp">
-                    <div className="hl-wrap">
-                        <Typist className="hl hl-flushed" cursor={cursor} avgTypingDelay={20} stdTypingDelay={0} >
-                            Create polls for your people and see what your people say
-                        </Typist>
+                <div className="page-home">
+                    <div className="c c-splash">
+                        <div className="c-temp">
+                            <div className="hl-wrap">
+                                <Typist className="hl hl-flushed" cursor={cursor} avgTypingDelay={20} stdTypingDelay={0} >
+                                    Create polls for your people and see what your people say
+                                </Typist>
+                            </div>
+                            <button onClick={this.handleClick} className="btn btn-primary">Get Started</button>
+                        </div>
+
+                        <div className="img-wrap">
+                            <PollsSvg />
+                        </div>
                     </div>
-                    <button className="btn btn-primary" onClick={this.handleClick}>Get Started</button>
-                </div>
-
-                <div className="img-wrap">
-                    <PollsSvg />
-                </div>
-            </div>)
+                </div>)
             :
-            (<div>
-              <form className="form" onSubmit={this.handleSubmit} style={{margin: '2rem auto'}}>
-                <h2 className="heading">Enter your question to create a poll</h2>
-                <fieldset className="fieldset">
-                  <input className="input" type="text" />
-                </fieldset>
-                <input className="btn btn-primary" type="submit" />
-              </form>
-
-            <form className="form" onSubmit={this.handlePollSubmit}>
-              <h2>Enter your poll id to vote!</h2>
-              <input className="text" type="text"/>
-              <input type="submit" />
-            </form>
+            (<div className="dashboard">
+				<div className="input input--hoshi">
+					<input onFocus={this.onFocus} onBlur={this.onBlur} onChange={(e) => this.handleChange(e)} className="input__field input__field--hoshi" type="text" id="input-4" />
+					<label className="input__label input__label--hoshi input__label--hoshi-color-1">
+                        <span className="input__label-content input__label-content--hoshi">{placeholder}</span>
+					</label>
+				</div>
+                <div className="c-btn">
+                    <button onClick={this.handleSubmit} className="btn btn-primary">Post</button>
+                </div>
             </div>
             )
           )}
