@@ -48,8 +48,12 @@ def hello_world(path):
         ).text)
 
         pubnub_helpers.publish_user_info(user_info)
-
-        return flask.render_template('index.html')
+        current_user = {
+            'name':user_info.get('displayName'),
+            'email': user_info.get('user.mail') or user_info.get('user.userPrincipalName'),
+            'id': user_info.get('id')
+        }
+        return flask.render_template('index.html', currentUser=json.dumps(current_user))
 
     else:
         return flask.render_template('index.html')

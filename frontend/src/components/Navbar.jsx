@@ -3,7 +3,15 @@ import { connect } from 'react-redux';
 import { router, Link } from 'react-router';
 
 class Navbar extends Component {
+    constructor(props){
+        super(props);
+        this.logout = ::this.logout;
+    }
 
+    logout(){
+        window.currentUser = null
+        window.location.reload();
+    }
   renderHeader() {
     if (window.currentUser) {
         return [
@@ -11,8 +19,11 @@ class Navbar extends Component {
               <img src="http://res.cloudinary.com/stellar-pixels/image/upload/v1486929017/logo_abrv_lb2yb5.svg" alt="" className="img-logo-abrv"/>
           </Link>,
           <ul className="navbar-nav">
+              <li className="navbar-item">
+                  <p>Logged in as {window.currentUser.name}</p>
+              </li>
             <li className="navbar-item">
-              <Link className="navbar-link dark" to="/">
+              <Link className="navbar-link dark" to="/" onClick={this.logout}>
                 <img className="icon-logout" src="/static/images/logout.svg" />
               </Link>
             </li>

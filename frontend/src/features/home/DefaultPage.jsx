@@ -5,6 +5,8 @@ import {router, browserHistory} from 'react-router';
 import { Hello, RedditList } from './index';
 import * as actions from './redux/actions';
 import PollsSvg from './PollsSvg';
+import PubNub from 'pubnub';
+
 // import Header from './header';
 
 import Typist from 'react-typist';
@@ -21,7 +23,8 @@ export class DefaultPage extends Component {
     super(props);
     this.state = {
         question: '',
-        focus: false
+        focus: false,
+        currentUser: null
     };
     this.handlePlusOne = ::this.handlePlusOne;
     this.handleMinusOne = ::this.handleMinusOne;
@@ -89,7 +92,7 @@ export class DefaultPage extends Component {
     let placeholder = (question && !focused) ? '' : 'What is your Question?';
     return (
       <div className="page-home">
-          {((!window.currentUser) ?
+          {((!this.state.currentUser  &&!window.currentUser) ?
             (
                 <div className="page-home">
                     <div className="c c-splash">
