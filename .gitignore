@@ -4,7 +4,7 @@
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 build
-node_modules
+node_modules/
 npm-debug.log
 target
 node
@@ -14,6 +14,7 @@ coverage
 .nyc_output
 .tmp
 .DS_Store
+bundle.js
 bundle.js.map
 bundle.map.js
 venv/
@@ -21,3 +22,6 @@ venv/
 *.css.map
 __pycache__/
 idea
+idea/
+.idea
+.idea/
