@@ -6,4 +6,5 @@ export PYTHONUNBUFFERED=1
 export microsoft_secret=ZbG2MvqJqy33zq3j3qPUQ7c
 export pubnub_subscribe_key=sub-c-6cbc7d16-f09c-11e6-9283-02ee2ddab7fe
 export pubnub_publish_key=pub-c-0644c683-0882-4d28-b6ac-81acf63ba847
+export DEVELOPMENT=TRUE
 python application.py

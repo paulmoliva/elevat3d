@@ -1,5 +1,6 @@
 import json
 import urllib
+import os
 
 import flask
 from flask import session
@@ -78,5 +79,6 @@ def hello_world(path):
 application.secret_key = Config.get('secret_key')
 
 if __name__ == "__main__":
-    application.debug = True
+    if os.environ.get('DEVELOPMENT'):
+        application.debug = True
     application.run()
