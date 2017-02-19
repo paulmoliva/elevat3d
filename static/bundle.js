@@ -67321,6 +67321,7 @@
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(newProps) {
 	      console.log(newProps);
+	      debugger;
 	      if (!newProps.results) {
 	        return;
 	      }
@@ -84148,15 +84149,14 @@
 	      var poll = this.props.router.params.id;
 	      var email = this.state.email;
 	      var vote = this.state.vote;
-	      // debugger;
 	
 	      pubnub.publish({
 	        message: {
 	          "poll_id": poll,
 	          "email": email,
 	          "vote": vote,
-	          "pollName": this.props.pollName,
-	          "name": this.props.currentUser
+	          "pollName": this.props.currentPoll.pollName,
+	          "currentUser": this.props.currentUser
 	        },
 	        channel: 'voting-channel'
 	      });
@@ -84244,7 +84244,8 @@
 	  return {
 	    polls: state.polls,
 	    pubnub: state.pubnub,
-	    currentPoll: state.polls.currentPoll
+	    currentPoll: state.polls.currentPoll,
+	    currentUser: state.currentUser
 	  };
 	}
 	
@@ -84897,7 +84898,7 @@
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
-	var _reduxLogger = __webpack_require__(692);
+	var _reduxLogger = __webpack_require__(694);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -85447,11 +85448,11 @@
 	});
 	exports.default = reducer;
 	
-	var _initialState = __webpack_require__(698);
+	var _initialState = __webpack_require__(692);
 	
 	var _initialState2 = _interopRequireDefault(_initialState);
 	
-	var _constants = __webpack_require__(699);
+	var _constants = __webpack_require__(693);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -85491,6 +85492,60 @@
 
 /***/ },
 /* 692 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var initialState = {
+	  currentUser: window.currentUser
+	};
+	
+	var _default = initialState;
+	exports.default = _default;
+	;
+	
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+	
+	  __REACT_HOT_LOADER__.register(initialState, "initialState", "/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/initialState.js");
+	
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/initialState.js");
+	}();
+
+	;
+
+/***/ },
+/* 693 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+	var LOGOUT = exports.LOGOUT = 'LOGOUT';
+	;
+	
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+	
+	  __REACT_HOT_LOADER__.register(RECEIVE_CURRENT_USER, 'RECEIVE_CURRENT_USER', '/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/constants.js');
+	
+	  __REACT_HOT_LOADER__.register(LOGOUT, 'LOGOUT', '/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/constants.js');
+	}();
+
+	;
+
+/***/ },
+/* 694 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85501,11 +85556,11 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _core = __webpack_require__(693);
+	var _core = __webpack_require__(695);
 	
-	var _helpers = __webpack_require__(694);
+	var _helpers = __webpack_require__(696);
 	
-	var _defaults = __webpack_require__(697);
+	var _defaults = __webpack_require__(699);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -85608,7 +85663,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 693 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85621,9 +85676,9 @@
 	
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(694);
+	var _helpers = __webpack_require__(696);
 	
-	var _diff = __webpack_require__(695);
+	var _diff = __webpack_require__(697);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -85750,7 +85805,7 @@
 	}
 
 /***/ },
-/* 694 */
+/* 696 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -85774,7 +85829,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 695 */
+/* 697 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85784,7 +85839,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(696);
+	var _deepDiff = __webpack_require__(698);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -85873,7 +85928,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 696 */
+/* 698 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -86302,7 +86357,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 697 */
+/* 699 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -86351,60 +86406,6 @@
 	  transformer: undefined
 	};
 	module.exports = exports["default"];
-
-/***/ },
-/* 698 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var initialState = {
-	  currentUser: window.currentUser
-	};
-	
-	var _default = initialState;
-	exports.default = _default;
-	;
-	
-	var _temp = function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-	
-	  __REACT_HOT_LOADER__.register(initialState, "initialState", "/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/initialState.js");
-	
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/initialState.js");
-	}();
-
-	;
-
-/***/ },
-/* 699 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
-	var LOGOUT = exports.LOGOUT = 'LOGOUT';
-	;
-	
-	var _temp = function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-	
-	  __REACT_HOT_LOADER__.register(RECEIVE_CURRENT_USER, 'RECEIVE_CURRENT_USER', '/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/constants.js');
-	
-	  __REACT_HOT_LOADER__.register(LOGOUT, 'LOGOUT', '/Users/paul/Desktop/projects/miniflask/frontend/src/common/currentUser/constants.js');
-	}();
-
-	;
 
 /***/ }
 /******/ ]);
