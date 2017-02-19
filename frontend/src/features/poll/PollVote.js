@@ -114,15 +114,14 @@ class PollVote extends React.Component {
     let poll = this.props.router.params.id;
     let email = this.state.email;
     let vote = this.state.vote;
-    // debugger;
 
     pubnub.publish({
       message: {
         "poll_id": poll,
         "email": email,
         "vote": vote,
-        "pollName": this.props.pollName,
-        "name": this.props.currentUser
+        "pollName": this.props.currentPoll.pollName,
+        "currentUser": this.props.currentUser
       },
       channel: 'voting-channel'
     });
@@ -188,7 +187,8 @@ function mapStateToProps(state) {
   return {
     polls: state.polls,
     pubnub: state.pubnub,
-    currentPoll: state.polls.currentPoll
+    currentPoll: state.polls.currentPoll,
+    currentUser: state.currentUser
   };
 }
 

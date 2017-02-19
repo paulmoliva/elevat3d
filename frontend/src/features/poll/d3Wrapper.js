@@ -24,6 +24,7 @@ class Chart extends React.Component {
 
   componentWillReceiveProps(newProps){
     console.log(newProps);
+    debugger;
     if ( !newProps.results ) { return; }
     let chartData = [this.props.results.yes, this.props.results.no];
     d3Chart.update(this.chartContainer, chartData, this.title);
@@ -33,7 +34,7 @@ class Chart extends React.Component {
 
     return (
       <div id='chart-container' className='chart-container'></div>
-    )
+    );
   }
 }
 
