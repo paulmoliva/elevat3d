@@ -17,14 +17,14 @@ export class DefaultPage extends Component {
   static propTypes = {
     home: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
         question: '',
-        focus: false,
-        currentUser: null
+        focus: false
     };
     this.handlePlusOne = ::this.handlePlusOne;
     this.handleMinusOne = ::this.handleMinusOne;
@@ -92,7 +92,7 @@ export class DefaultPage extends Component {
     let placeholder = (question && !focused) ? '' : 'What is your Question?';
     return (
       <div className="page-home">
-          {((!this.state.currentUser  &&!window.currentUser) ?
+          {((!this.props.currentUser) ?
             (
                 <div className="page-home">
                     <div className="c c-splash">
@@ -132,6 +132,7 @@ export class DefaultPage extends Component {
 function mapStateToProps(state) {
   return {
     home: state.home,
+    currentUser: state.currentUser
   };
 }
 

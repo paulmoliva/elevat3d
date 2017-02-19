@@ -17,7 +17,7 @@
 
 
 
-.navbar {/* background-color: #bfe3e6; */display: flex;justify-content: space-between;padding: 1.1rem 4rem;z-index: 9999;/* position: absolute; */width: 100%;align-items: center;}
+.navbar {background-color: #009ca9; display: flex;justify-content: space-between;padding: 1.1rem 4rem;z-index: 9999;/* position: absolute; */width: 100%;align-items: center;}
 
 .navbar-logo {
 

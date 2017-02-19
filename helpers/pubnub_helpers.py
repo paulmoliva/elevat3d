@@ -1,3 +1,5 @@
+import flask, time
+from flask import session
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 from pubnub.callbacks import SubscribeCallback
@@ -61,7 +63,9 @@ class MySubscribeCallback(SubscribeCallback):
         pass  # handle incoming presence data
 
     def message(self, pubnub, message):
-        pass  # handle incoming messages
+        if hasattr(message, 'user'):
+            session['user'] = message.user
+            print(session['user'])
 
 
 def publish_callback(result, status):
@@ -70,3 +74,16 @@ def publish_callback(result, status):
 
 def publish_user_info(user):
     pubnub.publish().channel('elevate-users').message(user).async(publish_callback)
+    session['user'] = user
+    print('go')
+
+
+def get_pubnub_user(user):
+    if not user:
+        return ''
+    pubnub.add_listener(MySubscribeCallback())
+    pubnub.subscribe().channels('users-{0}'.format(user['id'])).execute()
+    print('subscribed to ' + 'users-{0}'.format(user['id']))
+    pubnub.publish().channel('elevate-users').message({'request_user': user}).async(publish_callback)
+    time.sleep(1)
+

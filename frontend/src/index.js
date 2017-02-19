@@ -7,7 +7,8 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configStore from './common/configStore';
 
-const store = configStore();
+const initialState = {currentUser: window.currentUser};
+const store = configStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 document.addEventListener('DOMContentLoaded', () => {

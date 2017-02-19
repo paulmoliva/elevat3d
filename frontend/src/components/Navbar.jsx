@@ -13,17 +13,17 @@ class Navbar extends Component {
         window.location.reload();
     }
   renderHeader() {
-    if (window.currentUser) {
+    if (this.props.currentUser) {
         return [
           <Link to="/" className="navbar-logo">
               <img src="http://res.cloudinary.com/stellar-pixels/image/upload/v1486929017/logo_abrv_lb2yb5.svg" alt="" className="img-logo-abrv"/>
           </Link>,
           <ul className="navbar-nav">
               <li className="navbar-item">
-                  <p>Logged in as {window.currentUser.name}</p>
+                  <p>Logged in as {this.props.currentUser.displayName}</p>
               </li>
             <li className="navbar-item">
-              <Link className="navbar-link dark" to="/" onClick={this.logout}>
+              <Link className="navbar-link dark" to="/?out=1" onClick={this.logout}>
                 <img className="icon-logout" src="/static/images/logout.svg" />
               </Link>
             </li>
