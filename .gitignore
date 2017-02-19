@@ -16,8 +16,8 @@ coverage
 .DS_Store
 bundle.js.map
 bundle.map.js
-venv
+venv/
 *.pyc
 *.css.map
-__pycache__
+__pycache__/
 idea
