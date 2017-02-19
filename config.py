@@ -7,7 +7,8 @@ class Config:
         'microsoft_secret': 'msecretid',
         'root_url': 'http://localhost:5000',
         'pubnub_subscribe_key': 'hello',
-        'pubnub_publish_key': 'world'
+        'pubnub_publish_key': 'world',
+        'secret_key': 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     }
 
     @staticmethod

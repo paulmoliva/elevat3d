@@ -2,6 +2,8 @@ import json
 import urllib
 
 import flask
+from flask import session
+
 import requests
 
 from config import Config
@@ -40,23 +42,40 @@ def hello_world(path):
         )
 
         resp = json.loads(resp.text)
-        token = resp['access_token']
-
+        try:
+            token = resp['access_token']
+        except KeyError:
+            current_user = json.dumps(session.get('user', None))
+            return flask.render_template(
+                'index.html',
+                currentUser=current_user
+            )
         user_info = json.loads(requests.get(
             'https://graph.microsoft.com/v1.0/me',
             headers = {'Authorization': "Bearer {0}".format(token)}
         ).text)
 
         pubnub_helpers.publish_user_info(user_info)
-        current_user = {
-            'name':user_info.get('displayName'),
-            'email': user_info.get('user.mail') or user_info.get('user.userPrincipalName'),
-            'id': user_info.get('id')
-        }
-        return flask.render_template('index.html', currentUser=json.dumps(current_user))
-
+        current_user = json.dumps(session.get('user', None))
+        return flask.render_template(
+            'index.html',
+             currentUser=current_user
+        )
+    elif flask.request.args.get('out'):
+        session['user'] = None
+        return flask.render_template(
+            'index.html',
+            currentUser=json.dumps(None)
+        )
     else:
-        return flask.render_template('index.html')
+        pubnub_helpers.get_pubnub_user(session.get('user'))
+        current_user = json.dumps(session.get('user', None))
+        return flask.render_template(
+            'index.html',
+            currentUser=current_user
+        )
+
+application.secret_key = Config.get('secret_key')
 
 if __name__ == "__main__":
     application.debug = True

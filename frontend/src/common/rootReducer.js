@@ -4,13 +4,15 @@ import homeReducer from '../features/home/redux/reducer';
 import pollReducer from '../features/poll/redux/reducer';
 import errorReducer from './errors/reducer';
 import pubnubReducer from './pubnub/reducer';
+import currentUserReducer from './currentUser/reducer';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   home: homeReducer,
   polls: pollReducer,
   errors: errorReducer,
-  pubnub: pubnubReducer
+  pubnub: pubnubReducer,
+  currentUser: currentUserReducer
 });
 
 export default rootReducer;

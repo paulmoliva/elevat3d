@@ -121,7 +121,8 @@ class PollVote extends React.Component {
         "poll_id": poll,
         "email": email,
         "vote": vote,
-        "pollName": this.props.pollName
+        "pollName": this.props.pollName,
+        "name": this.props.currentUser
       },
       channel: 'voting-channel'
     });
